@@ -10,5 +10,6 @@ CREATE TABLE `manager_info` (
   `mag_login_ip` varchar(20) DEFAULT NULL COMMENT '管理员登录IP',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`mag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`mag_id`),
+  UNIQUE KEY `mag_email` (`mag_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
