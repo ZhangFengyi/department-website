@@ -21,13 +21,13 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setSuccessUrl("/");
 
-//        Map<String, String> filterChainDefinitionMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
-//        filterChainDefinitionMap.put("/resource/**", "anon");
-//        filterChainDefinitionMap.put("/page/**", "anon");
-//        filterChainDefinitionMap.put("/api/**", "anon");
-//        filterChainDefinitionMap.put("/login", "anon");
-//        filterChainDefinitionMap.put("/403", "anon");
-//        filterChainDefinitionMap.put("/**", "authc");
+        Map<String, String> filterChainDefinitionMap = shiroFilterFactoryBean.getFilterChainDefinitionMap();
+        filterChainDefinitionMap.put("/resource/**", "anon");
+        filterChainDefinitionMap.put("/page/**", "anon");
+        filterChainDefinitionMap.put("/api/**", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/403", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
 
         return shiroFilterFactoryBean;
     }
