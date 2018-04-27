@@ -2,7 +2,11 @@ package com.baohao.departmentwebsite.controller;
 
 import com.baohao.departmentwebsite.common.constant.SessionConstants;
 import com.baohao.departmentwebsite.model.ManagerInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +30,30 @@ public class LoginController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(String username, String password, Model model) {
+        String message;
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            message = "用户名和密码不能为空！";
+            model.addAttribute("message", message);
+            return "login";
+        }
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(StringUtils.trim(username), StringUtils.trim(password));
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            if (subject.isAuthenticated()) {
+                return "redirect:/";
+            } else {
+                return "login";
+            }
+        } catch (IncorrectCredentialsException | UnknownAccountException e) {
+            message = "用户名或密码错误！";
+        }
+        model.addAttribute("message", message);
+        return "login";
     }
 
 }
