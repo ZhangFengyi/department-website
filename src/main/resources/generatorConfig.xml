@@ -49,6 +49,8 @@
         <table tableName="visit_info"></table>
         <table tableName="image_group_info"></table>
         <table tableName="video_group_inf0"></table>
+        <table tableName="article"></table>
+
 
     </context>
 
