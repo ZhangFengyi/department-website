@@ -42,7 +42,6 @@ public class ShiroConfig {
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setSessionManager(sessionManager());
-//        defaultWebSecurityManager.setRealm(shiroDBRealm());
         return defaultWebSecurityManager;
     }
 
@@ -71,33 +70,11 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-
-//    @Bean(name = "shiroDBRealm")
-//    @DependsOn("lifecycleBeanPostProcessor")
-//    public ShiroDBRealm getShiroDBRealm() {
-//        return new ShiroDBRealm();
-//    }
-//
-//    @Bean(name = "lifecycleBeanPostProcessor")
-//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-//        return new LifecycleBeanPostProcessor();
-//    }
-
-//    等到 ApplicationConText 加载完成之后再装配 shiroRealm
+//    等到 ApplicationContext 加载完成之后再装配 shiroRealm
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent event) {
         ApplicationContext context = event.getApplicationContext();
         ((DefaultWebSecurityManager) context.getBean("securityManager")).setRealm(shiroDBRealm());
     }
 
-
-    /**
-     * 等到ApplicationContext 加载完成之后 装配shiroRealm
-     */
-//    @EventListener
-//    public void handleContextRefresh(ContextRefreshedEvent event) {
-//        ApplicationContext context = event.getApplicationContext();
-//
-//        ((DefaultWebSecurityManager) context.getBean("securityManager")).setRealm(getShiroDBRealm());
-//    }
 }
