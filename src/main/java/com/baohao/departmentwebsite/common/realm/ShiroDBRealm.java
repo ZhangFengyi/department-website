@@ -1,4 +1,4 @@
-package com.baohao.departmentwebsite.realm;
+package com.baohao.departmentwebsite.common.realm;
 
 import com.baohao.departmentwebsite.common.GlobalConfigurations;
 import com.baohao.departmentwebsite.common.constant.SessionConstants;
@@ -55,7 +55,7 @@ public class ShiroDBRealm extends AuthorizingRealm {
             throw new UnknownAccountException("Manager does not exist");
         }
         if (GlobalConfigurations.isReleaseMode()) {
-            if (!StringUtils.equals(EncryptUtils.md5Encrypt(password).toString(), manager.getMagPwd())) {
+            if (!StringUtils.equals(EncryptUtils.md5Encrypt(password).toString(), manager.getMagPsw())) {
                 logger.warn("Wrong password inout, email: " + email + " password: " + password);
                 throw new IncorrectCredentialsException("Incorrect password");
             }

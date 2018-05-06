@@ -325,73 +325,73 @@ public class ManagerInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdIsNull() {
-            addCriterion("mag_pwd is null");
+        public Criteria andMagPswIsNull() {
+            addCriterion("mag_psw is null");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdIsNotNull() {
-            addCriterion("mag_pwd is not null");
+        public Criteria andMagPswIsNotNull() {
+            addCriterion("mag_psw is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdEqualTo(String value) {
-            addCriterion("mag_pwd =", value, "magPwd");
+        public Criteria andMagPswEqualTo(String value) {
+            addCriterion("mag_psw =", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdNotEqualTo(String value) {
-            addCriterion("mag_pwd <>", value, "magPwd");
+        public Criteria andMagPswNotEqualTo(String value) {
+            addCriterion("mag_psw <>", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdGreaterThan(String value) {
-            addCriterion("mag_pwd >", value, "magPwd");
+        public Criteria andMagPswGreaterThan(String value) {
+            addCriterion("mag_psw >", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdGreaterThanOrEqualTo(String value) {
-            addCriterion("mag_pwd >=", value, "magPwd");
+        public Criteria andMagPswGreaterThanOrEqualTo(String value) {
+            addCriterion("mag_psw >=", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdLessThan(String value) {
-            addCriterion("mag_pwd <", value, "magPwd");
+        public Criteria andMagPswLessThan(String value) {
+            addCriterion("mag_psw <", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdLessThanOrEqualTo(String value) {
-            addCriterion("mag_pwd <=", value, "magPwd");
+        public Criteria andMagPswLessThanOrEqualTo(String value) {
+            addCriterion("mag_psw <=", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdLike(String value) {
-            addCriterion("mag_pwd like", value, "magPwd");
+        public Criteria andMagPswLike(String value) {
+            addCriterion("mag_psw like", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdNotLike(String value) {
-            addCriterion("mag_pwd not like", value, "magPwd");
+        public Criteria andMagPswNotLike(String value) {
+            addCriterion("mag_psw not like", value, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdIn(List<String> values) {
-            addCriterion("mag_pwd in", values, "magPwd");
+        public Criteria andMagPswIn(List<String> values) {
+            addCriterion("mag_psw in", values, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdNotIn(List<String> values) {
-            addCriterion("mag_pwd not in", values, "magPwd");
+        public Criteria andMagPswNotIn(List<String> values) {
+            addCriterion("mag_psw not in", values, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdBetween(String value1, String value2) {
-            addCriterion("mag_pwd between", value1, value2, "magPwd");
+        public Criteria andMagPswBetween(String value1, String value2) {
+            addCriterion("mag_psw between", value1, value2, "magPsw");
             return (Criteria) this;
         }
 
-        public Criteria andMagPwdNotBetween(String value1, String value2) {
-            addCriterion("mag_pwd not between", value1, value2, "magPwd");
+        public Criteria andMagPswNotBetween(String value1, String value2) {
+            addCriterion("mag_psw not between", value1, value2, "magPsw");
             return (Criteria) this;
         }
 

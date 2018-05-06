@@ -1,6 +1,6 @@
 package com.baohao.departmentwebsite.config;
 
-import com.baohao.departmentwebsite.realm.ShiroDBRealm;
+import com.baohao.departmentwebsite.common.realm.ShiroDBRealm;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
