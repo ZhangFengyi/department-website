@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(Model model) {
         return "index";
     }
@@ -45,7 +45,7 @@ public class LoginController {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             if (subject.isAuthenticated()) {
-                return "redirect:/";
+                return "redirect:/index";
             } else {
                 return "login";
             }
