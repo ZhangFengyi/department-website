@@ -383,6 +383,76 @@ public class FnInfoExample {
             addCriterion("fn_number not between", value1, value2, "fnNumber");
             return (Criteria) this;
         }
+
+        public Criteria andFnHrefIsNull() {
+            addCriterion("fn_href is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefIsNotNull() {
+            addCriterion("fn_href is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefEqualTo(String value) {
+            addCriterion("fn_href =", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefNotEqualTo(String value) {
+            addCriterion("fn_href <>", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefGreaterThan(String value) {
+            addCriterion("fn_href >", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefGreaterThanOrEqualTo(String value) {
+            addCriterion("fn_href >=", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefLessThan(String value) {
+            addCriterion("fn_href <", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefLessThanOrEqualTo(String value) {
+            addCriterion("fn_href <=", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefLike(String value) {
+            addCriterion("fn_href like", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefNotLike(String value) {
+            addCriterion("fn_href not like", value, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefIn(List<String> values) {
+            addCriterion("fn_href in", values, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefNotIn(List<String> values) {
+            addCriterion("fn_href not in", values, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefBetween(String value1, String value2) {
+            addCriterion("fn_href between", value1, value2, "fnHref");
+            return (Criteria) this;
+        }
+
+        public Criteria andFnHrefNotBetween(String value1, String value2) {
+            addCriterion("fn_href not between", value1, value2, "fnHref");
+            return (Criteria) this;
+        }
     }
 
     /**

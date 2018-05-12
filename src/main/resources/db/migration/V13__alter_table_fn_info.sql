@@ -1,0 +1,1 @@
+ALTER TABLE `fn_info` ADD `fn_href` varchar(50) COMMENT '一级菜单的 Href' AFTER `fn_number`;

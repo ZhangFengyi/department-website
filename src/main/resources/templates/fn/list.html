@@ -21,16 +21,6 @@
     <!-- iCheck -->
    <!--<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
     <link th:href="@{'/resource/basic/iCheck/skins/flat/green.css'}" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <!--<link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">-->
-    <link th:href="@{'/resource/basic/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'}" rel="stylesheet">
-    <!-- PNotify -->
-    <!--<link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">-->
-    <link th:href="@{'/resource/basic/pnotify/dist/pnotify.css'}" rel="stylesheet">
-    <!--<link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">-->
-    <link th:href="@{'/resource/basic/pnotify/dist/pnotify.buttons.css'}" rel="stylesheet">
-    <!--<link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
-    <link th:href="@{'/resource/basic/pnotify/dist/pnotify.nonblock.css'}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <!--<link href="../build/css/custom.min.css" rel="stylesheet">-->
@@ -298,7 +288,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>管理员 <small>后台管理系统用户</small></h3>
+                <h3>一级菜单 <small>前端页面顶部的导航栏</small></h3>
               </div>
 
               <div class="title_right">
@@ -319,7 +309,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>管理员列表 <small>当前后台管理系统所有用户</small></h2>
+                    <h2>一级菜单列表 <small>当前前端页面顶部所有的导航项</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -342,34 +332,6 @@
 
                     <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
-                    <!-- modals -->
-                    <!-- Large modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">添加</button>
-
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                      <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                          </div>
-                          <div class="modal-body">
-                            <h4>Text in a modal</h4>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /modals -->
-
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
@@ -378,11 +340,8 @@
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
                             <th class="column-title">ID </th>
-                            <th class="column-title">昵称 </th>
-                            <th class="column-title">邮箱 </th>
-                            <th class="column-title">头像 </th>
-                            <th class="column-title">登录时间 </th>
-                            <th class="column-title">登录 IP </th>
+                            <th class="column-title">名称 </th>
+                            <th class="column-title">编号 </th>
                             <th class="column-title no-link last"><span class="nobr">操作</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -392,17 +351,14 @@
                         </thead>
 
                         <tbody>
-                        <th:block th:each="manager,managerStat : ${managerInfoList}">
-                          <tr th:class="${managerStat.even} ? 'even pointer' : 'odd pointer'">
+                        <th:block th:each="fn,fnStat : ${fnInfoList}">
+                          <tr th:class="${fnStat.even} ? 'even pointer' : 'odd pointer'">
                             <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" " th:text="${manager.magId}">ID </td>
-                            <td class=" " th:text="${manager.magName}">昵称 </td>
-                            <td class=" " th:text="${manager.magEmail}">邮箱 </td>
-                            <td class=" " th:text="${manager.magImage}">头像 </td>
-                            <td class=" " th:text="${manager.magLoginTime}">登录时间 </td>
-                            <td class=" " th:text="${manager.magLoginIp}">登录 IP </td>
+                            <td class=" " th:text="${fn.getFnId()}">ID </td>
+                            <td class=" " th:text="${fn.getFnName()}">昵称 </td>
+                            <td class=" " th:text="${fn.getFnNumber()}">邮箱 </td>
                             <td class=" last"><a href="#">编辑</a>
                             </td>
                           </tr>
@@ -443,23 +399,12 @@
     <!-- NProgress -->
     <!--<script src="../vendors/nprogress/nprogress.js"></script>-->
     <script th:src="@{'/resource/basic/nprogress/nprogress.js'}"></script>
-    <!-- bootstrap-progressbar -->
-    <!--<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>-->
-    <script th:src="@{'/resource/basic/bootstrap-progressbar/bootstrap-progressbar.min.js'}"></script>
     <!-- iCheck -->
     <!--<script src="../vendors/iCheck/icheck.min.js"></script>-->
     <script th:src="@{'/resource/basic/iCheck/icheck.min.js'}"></script>
-    <!-- PNotify -->
-    <!--<script src="../vendors/pnotify/dist/pnotify.js"></script>-->
-    <script th:src="@{'/resource/basic/pnotify/dist/pnotify.js'}"></script>
-    <!--<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>-->
-    <script th:src="@{'/resource/basic/pnotify/dist/pnotify.buttons.js'}"></script>
-    <!--<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>-->
-    <script th:src="@{'/resource/basic/pnotify/dist/pnotify.nonblock.js'}"></script>
 
     <!-- Custom Theme Scripts -->
     <!--<script src="../build/js/custom.min.js"></script>-->
-    <!--<script th:src="@{'/resource/gentelella/js/custom.min.js'}"></script>-->
-    <script th:src="@{'/resource/gentelella/js/custom.js'}"></script>
+    <script th:src="@{'/resource/gentelella/js/custom.min.js'}"></script>
   </body>
 </html>

@@ -39,17 +39,17 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user_info"></table>
-        <table tableName="manager_info"></table>
+        <!--<table tableName="user_info"></table>-->
+        <!--<table tableName="manager_info"></table>-->
         <table tableName="fn_info"></table>
-        <table tableName="sn_info"></table>
-        <table tableName="article_list"></table>
-        <table tableName="image_info"></table>
-        <table tableName="video_info"></table>
-        <table tableName="visit_info"></table>
-        <table tableName="image_group_info"></table>
-        <table tableName="video_group_inf0"></table>
-        <table tableName="article"></table>
+        <!--<table tableName="sn_info"></table>-->
+        <!--<table tableName="article_list"></table>-->
+        <!--<table tableName="image_info"></table>-->
+        <!--<table tableName="video_info"></table>-->
+        <!--<table tableName="visit_info"></table>-->
+        <!--<table tableName="image_group_info"></table>-->
+        <!--<table tableName="video_group_inf0"></table>-->
+        <!--<table tableName="article"></table>-->
 
 
     </context>
