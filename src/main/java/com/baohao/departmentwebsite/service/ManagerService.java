@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class ManagerService {
-
     @Resource
     private ManagerInfoMapper managerInfoMapper;
 
@@ -25,4 +24,9 @@ public class ManagerService {
 
         return managerInfoList.get(0);
     }
+
+    public void addManager(ManagerInfo addManager) {
+        managerInfoMapper.insertSelective(addManager);
+    }
+
 }
