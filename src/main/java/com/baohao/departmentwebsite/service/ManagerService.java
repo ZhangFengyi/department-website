@@ -29,4 +29,8 @@ public class ManagerService {
         managerInfoMapper.insertSelective(addManager);
     }
 
+    public void updateManagerLoginInfo(ManagerInfo manager) {
+        managerInfoMapper.updateByPrimaryKeySelective(manager);
+    }
+
 }

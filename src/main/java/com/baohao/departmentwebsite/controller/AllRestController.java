@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @RestController
 public class AllRestController {
@@ -30,6 +31,9 @@ public class AllRestController {
         addManager.setMagEmail(newManager.getEmail());
         addManager.setMagName(newManager.getUsername());
         addManager.setMagPsw(EncryptUtils.md5Encrypt(newManager.getPassword()).toString());
+        Date date = new Date();
+        date.setTime(System.currentTimeMillis());
+        addManager.setCreateTime(date);
         managerService.addManager(addManager);
         return ResultHolder.success(null);
     }

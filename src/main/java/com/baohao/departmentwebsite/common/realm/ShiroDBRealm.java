@@ -17,13 +17,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 
 public class ShiroDBRealm extends AuthorizingRealm {
-
     private Logger logger = LoggerFactory.getLogger("loginLogger");
 
     @Resource
     private ManagerService managerService;
+
+    @Resource
+    private HttpServletRequest httpServletRequest;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -62,7 +68,44 @@ public class ShiroDBRealm extends AuthorizingRealm {
         }
         SecurityUtils.getSubject().getSession().setAttribute(SessionConstants.ATTR_USER, manager);
         logger.info("Manager login, email: " + email);
+        // 更新 manager 登录信息
+        Date date = new Date();
+        date.setTime(System.currentTimeMillis());
+        manager.setMagLoginTime(date);
+        String ip = getIpAddr(httpServletRequest);
+        manager.setMagLoginIp(ip);
+        managerService.updateManagerLoginInfo(manager);
 
         return new SimpleAuthenticationInfo(email, password, getName());
+    }
+
+    private String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+            if ("127.0.0.1".equalsIgnoreCase(ip)) {
+                // 根据网卡读取本机配置
+                InetAddress inet = null;
+                try {
+                    inet = InetAddress.getLocalHost();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                ip = inet.getHostAddress();
+            }
+        }
+        // 多个代理的情况，多个 IP 按','分割，第一个 IP 为客户端真实 IP
+        if (ip != null && ip.length() > 15) {
+            if (ip.indexOf(",") > 0) {
+                ip = ip.substring(0, ip.indexOf(","));
+            }
+        }
+        return ip;
     }
 }
