@@ -359,9 +359,9 @@
 
                     <!-- modals -->
                     <!-- Large modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="addManager">添加</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".manager-add" ng-click="addManager">添加</button>
 
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade bs-example-modal-lg manager-add" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
@@ -432,25 +432,70 @@
                         </thead>
 
                         <tbody>
-                        <th:block th:each="manager,managerStat : ${managerInfoList}">
-                          <tr th:class="${managerStat.even} ? 'even pointer' : 'odd pointer'">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" " th:text="${manager.magId}">ID </td>
-                            <td class=" " th:text="${manager.magName}">昵称 </td>
-                            <td class=" " th:text="${manager.magEmail}">邮箱 </td>
-                            <td class=" " th:text="${manager.magImage}">头像 </td>
-                            <td class=" " th:text="${manager.magLoginTime}">登录时间 </td>
-                            <td class=" " th:text="${manager.magLoginIp}">登录 IP </td>
-                            <td class=" last"><a href="#">编辑</a>
-                            </td>
-                          </tr>
-                        </th:block>
+                            <tr ng-repeat="manager in managers" ng-class="$index % 2 == 0 ? 'even ponit' : 'odd pointer'">
+                                <td class="a-center">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">{{manager.magId}}</td>
+                                <td class=" ">{{manager.magName}}</td>
+                                <td class=" ">{{manager.magEmail}}</td>
+                                <td class=" ">{{manager.magImage}}</td>
+                                <td class=" ">{{manager.magLoginTime}}</td>
+                                <td class=" ">{{manager.magLoginIp}}</td>
+                                <td class=" last"><a href="" data-toggle="modal" data-target=".manager-edit" ng-click="editManager(manager)">编辑</a></td>
+                            </tr>
                         </tbody>
                       </table>
                     </div>
-							
+
+                    <div class="modal fade bs-example-modal-lg manager-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="">编辑管理员</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form data-parsley-validate class="form-horizontal form-label-left">
+                              <div class="form-group">
+                                <label for="editUsername" class="control-label col-md-3 col-sm-3 col-xs-12">用户名 <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="editUsername" class="form-control col-md-7 col-xs-12" type="text" ng-model="editM.magName">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="editEmail">邮箱 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="email" id="editEmail" ng-model="editM.magEmail" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <!--<div class="form-group">-->
+                                <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="editPassword">密码 <span class="required">*</span>-->
+                                <!--</label>-->
+                                <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                  <!--<input type="password" id="editPassword" ng-model="editM.magPsw" required="required" class="form-control col-md-7 col-xs-12">-->
+                                <!--</div>-->
+                              <!--</div>-->
+                              <!--<div class="form-group">-->
+                                <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-confirm-password">确认密码 <span class="required">*</span>-->
+                                <!--</label>-->
+                                <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                                  <!--<input type="password" id="edit-confirm-password" ng-model="editM.confirmPassword" required="required" class="form-control col-md-7 col-xs-12">-->
+                                <!--</div>-->
+                              <!--</div>-->
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="doEditManager(editM)">保存</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
 						
                   </div>
                 </div>

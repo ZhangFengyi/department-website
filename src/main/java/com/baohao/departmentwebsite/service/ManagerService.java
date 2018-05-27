@@ -33,4 +33,12 @@ public class ManagerService {
         managerInfoMapper.updateByPrimaryKeySelective(manager);
     }
 
+    public List<ManagerInfo> listManager() {
+        List<ManagerInfo> managerInfoList = managerInfoMapper.selectByExample(null);
+        return managerInfoList;
+    }
+
+    public void editManager(ManagerInfo editManager) {
+        managerInfoMapper.updateByPrimaryKeySelective(editManager);
+    }
 }

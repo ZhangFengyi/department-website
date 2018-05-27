@@ -10,11 +10,9 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
-
 @Configuration
 @MapperScan(basePackages = "com.baohao.departmentwebsite.dao", sqlSessionFactoryRef = "sqlSessionFactory")
 public class MyBatisConfig {
-
     @Bean
     @Primary
     public DataSource dataSource() throws PropertyVetoException {
