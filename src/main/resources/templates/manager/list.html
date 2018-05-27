@@ -420,7 +420,7 @@
                             <th class="column-title">ID </th>
                             <th class="column-title">昵称 </th>
                             <th class="column-title">邮箱 </th>
-                            <th class="column-title">头像 </th>
+                            <!--<th class="column-title">头像 </th>-->
                             <th class="column-title">登录时间 </th>
                             <th class="column-title">登录 IP </th>
                             <th class="column-title no-link last"><span class="nobr">操作</span>
@@ -432,14 +432,14 @@
                         </thead>
 
                         <tbody>
-                            <tr ng-repeat="manager in managers" ng-class="$index % 2 == 0 ? 'even ponit' : 'odd pointer'">
+                            <tr ng-repeat="manager in managers" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
                                 <td class="a-center">
                                     <input type="checkbox" class="flat" name="table_records">
                                 </td>
                                 <td class=" ">{{manager.magId}}</td>
                                 <td class=" ">{{manager.magName}}</td>
                                 <td class=" ">{{manager.magEmail}}</td>
-                                <td class=" ">{{manager.magImage}}</td>
+                                <!--<td class=" ">{{manager.magImage}}</td>-->
                                 <td class=" ">{{manager.magLoginTime}}</td>
                                 <td class=" ">{{manager.magLoginIp}}</td>
                                 <td class=" last"><a href="" data-toggle="modal" data-target=".manager-edit" ng-click="editManager(manager)">编辑</a></td>
