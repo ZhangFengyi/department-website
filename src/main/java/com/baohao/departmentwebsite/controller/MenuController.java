@@ -2,11 +2,10 @@ package com.baohao.departmentwebsite.controller;
 
 import com.baohao.departmentwebsite.dao.FnInfoMapper;
 import com.baohao.departmentwebsite.dao.SnInfoMapper;
-import com.baohao.departmentwebsite.model.FnInfo;
-import com.baohao.departmentwebsite.model.FnInfoExample;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,10 +20,11 @@ public class MenuController {
 
     @RequestMapping(value = "/fn/list")
     public String fnList(Model model) {
-        FnInfoExample example = new FnInfoExample();
-        example.setOrderByClause("`fn_number` ASC, `fn_id` ASC");
-        List<FnInfo> fnInfoList = fnInfoMapper.selectByExample(example);
-        model.addAttribute("fnInfoList", fnInfoList);
         return "fn/list";
+    }
+
+    @RequestMapping(value = "sn/list", method = RequestMethod.GET)
+    public String snList(Model model) {
+        return "sn/list";
     }
 }

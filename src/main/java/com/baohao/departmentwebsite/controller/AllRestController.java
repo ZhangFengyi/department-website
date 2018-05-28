@@ -4,7 +4,8 @@ import com.baohao.departmentwebsite.common.util.EncryptUtils;
 import com.baohao.departmentwebsite.controller.request.*;
 import com.baohao.departmentwebsite.model.FnInfo;
 import com.baohao.departmentwebsite.model.ManagerInfo;
-import com.baohao.departmentwebsite.service.FnService;
+import com.baohao.departmentwebsite.model.SnInfo;
+import com.baohao.departmentwebsite.service.MenuService;
 import com.baohao.departmentwebsite.service.ManagerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class AllRestController {
     private ManagerService managerService;
 
     @Resource
-    private FnService fnService;
+    private MenuService menuService;
 
     @RequestMapping(value = "/manager/add", method = RequestMethod.POST)
     public ResultHolder userAdd(@RequestBody ManagerAddRequest newManager) {
@@ -82,7 +83,7 @@ public class AllRestController {
     @RequestMapping(value = "fn/list", method = RequestMethod.POST)
     public ResultHolder listFn(@RequestBody FnListRequest request) {
         try {
-            List<FnInfo> fnInfoList = fnService.listFn();
+            List<FnInfo> fnInfoList = menuService.listFn();
             return ResultHolder.success(fnInfoList);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
@@ -96,7 +97,7 @@ public class AllRestController {
             add.setFnName(request.getFnName());
             add.setFnNumber(request.getFnNumber());
             add.setFnHref(request.getFnHref());
-            fnService.addFn(add);
+            menuService.addFn(add);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
@@ -111,7 +112,48 @@ public class AllRestController {
             edit.setFnName(request.getFnName());
             edit.setFnNumber(request.getFnNumber());
             edit.setFnHref(request.getFnHref());
-            fnService.editFn(edit);
+            menuService.editFn(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "sn/list", method = RequestMethod.POST)
+    public ResultHolder listSn(@RequestBody SnListRequest request) {
+        try {
+            List<SnInfo> snInfoList = menuService.listSn();
+            return ResultHolder.success(snInfoList);
+        } catch (Exception e){
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "sn/add", method = RequestMethod.POST)
+    public ResultHolder addSn(@RequestBody SnAddRequest request) {
+        try {
+            SnInfo add = new SnInfo();
+            add.setSnName(request.getSnName());
+            add.setSnNumber(request.getSnNumber());
+            add.setSnDoc(request.getSnDoc());
+            add.setFnId(request.getFnId());
+            menuService.addSn(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "sn/edit", method = RequestMethod.POST)
+    public ResultHolder editSn(@RequestBody SnEditRequest request) {
+        try {
+            SnInfo edit = new SnInfo();
+            edit.setSnId(request.getSnId());
+            edit.setSnName(request.getSnName());
+            edit.setSnNumber(request.getSnNumber());
+            edit.setSnDoc(request.getSnDoc());
+            edit.setFnId(request.getFnId());
+            menuService.editSn(edit);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
