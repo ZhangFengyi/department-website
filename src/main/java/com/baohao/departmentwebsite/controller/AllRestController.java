@@ -2,9 +2,11 @@ package com.baohao.departmentwebsite.controller;
 
 import com.baohao.departmentwebsite.common.util.EncryptUtils;
 import com.baohao.departmentwebsite.controller.request.*;
+import com.baohao.departmentwebsite.model.Article;
 import com.baohao.departmentwebsite.model.FnInfo;
 import com.baohao.departmentwebsite.model.ManagerInfo;
 import com.baohao.departmentwebsite.model.SnInfo;
+import com.baohao.departmentwebsite.service.ArticleService;
 import com.baohao.departmentwebsite.service.MenuService;
 import com.baohao.departmentwebsite.service.ManagerService;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +26,9 @@ public class AllRestController {
 
     @Resource
     private MenuService menuService;
+
+    @Resource
+    private ArticleService articleService;
 
     @RequestMapping(value = "/manager/add", method = RequestMethod.POST)
     public ResultHolder userAdd(@RequestBody ManagerAddRequest newManager) {
@@ -154,6 +159,49 @@ public class AllRestController {
             edit.setSnDoc(request.getSnDoc());
             edit.setFnId(request.getFnId());
             menuService.editSn(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "article/list", method = RequestMethod.POST)
+    public ResultHolder listArticle(@RequestBody ArticleListRequest request) {
+        try {
+            List<Article> articleList = articleService.listArticle();
+            return ResultHolder.success(articleList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "article/add", method = RequestMethod.POST)
+    public ResultHolder addArticle(@RequestBody ArticleAddRequest request) {
+        try {
+            Article add = new Article();
+            add.setArtiName(request.getArtiName());
+            add.setArtiAuthor(request.getArtiAuthor());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
+            articleService.addArticle(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "article/edit", method = RequestMethod.POST)
+    public ResultHolder editArticle(@RequestBody ArticleEditRequest request) {
+        try {
+            Article edit = new Article();
+            edit.setArtiId(request.getArtiId());
+            edit.setArtiName(request.getArtiName());
+            edit.setArtiAuthor(request.getArtiAuthor());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            edit.setUpdateTime(date);
+            articleService.editArticle(edit);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
