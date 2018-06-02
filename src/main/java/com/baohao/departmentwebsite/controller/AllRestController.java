@@ -2,10 +2,7 @@ package com.baohao.departmentwebsite.controller;
 
 import com.baohao.departmentwebsite.common.util.EncryptUtils;
 import com.baohao.departmentwebsite.controller.request.*;
-import com.baohao.departmentwebsite.model.Article;
-import com.baohao.departmentwebsite.model.FnInfo;
-import com.baohao.departmentwebsite.model.ManagerInfo;
-import com.baohao.departmentwebsite.model.SnInfo;
+import com.baohao.departmentwebsite.model.*;
 import com.baohao.departmentwebsite.service.ArticleService;
 import com.baohao.departmentwebsite.service.MenuService;
 import com.baohao.departmentwebsite.service.ManagerService;
@@ -202,6 +199,47 @@ public class AllRestController {
             date.setTime(System.currentTimeMillis());
             edit.setUpdateTime(date);
             articleService.editArticle(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "articleList/list", method = RequestMethod.POST)
+    public ResultHolder listArticleList(@RequestBody ArticleListListRequest request) {
+        try {
+            List<ArticleList> articleListList = articleService.listArticleList();
+            return ResultHolder.success(articleListList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "articleList/add", method = RequestMethod.POST)
+    public ResultHolder addArticleList(@RequestBody ArticleListAddRequest request) {
+        try {
+            ArticleList add = new ArticleList();
+            add.setArlName(request.getArlName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
+            articleService.addArticleList(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "articleList/edit", method = RequestMethod.POST)
+    public ResultHolder editArticleList(@RequestBody ArticleListEditRequest request) {
+        try {
+            ArticleList edit = new ArticleList();
+            edit.setArlId(request.getArlId());
+            edit.setArlName(request.getArlName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            edit.setUpdateTime(date);
+            articleService.editArticleList(edit);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());

@@ -11,4 +11,9 @@ public class ArticleController {
     public String articleList(Model model) {
         return "article/list";
     }
+
+    @RequestMapping(value = "/articleList/list", method = RequestMethod.GET)
+    public String articleListList(Model model) {
+        return "article-list/list";
+    }
 }

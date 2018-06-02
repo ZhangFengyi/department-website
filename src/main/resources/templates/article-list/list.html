@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="articleApp" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="articleListApp" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -52,7 +52,7 @@
     <link th:href="@{'/resource/gentelella/css/custom.min.css'}" rel="stylesheet">
 </head>
 
-<body class="nav-md" ng-controller="articleCtrl">
+<body class="nav-md" ng-controller="articleListCtrl">
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
@@ -321,7 +321,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>文章 <small>前端页面用到的文章</small></h3>
+                        <h3>文章列表 <small>前端页面用到的文章列表</small></h3>
                     </div>
 
                     <div class="title_right">
@@ -342,7 +342,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>文章 <small>前端页面用到的所有的文章</small></h2>
+                                <h2>文章列表 <small>前端页面用到的所有的文章列表</small></h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -363,36 +363,30 @@
 
                             <div class="x_content">
 
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".article-add" ng-click="addArticle()">添加</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".article-list-add" ng-click="addArticleList()">添加</button>
 
-                                <div class="modal fade bs-example-modal-lg article-add" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade bs-example-modal-lg article-list-add" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
 
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title" id="myModalLabel">添加文章</h4>
+                                                <h4 class="modal-title" id="myModalLabel">添加文章列表</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                                                     <div class="form-group">
                                                         <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input id="name" class="form-control col-md-7 col-xs-12" type="text" name="name" ng-model="add.artiName">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="author" class="control-label col-md-3 col-sm-3 col-xs-12">作者 <span class="required">*</span></label>
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input id="author" class="form-control col-md-7 col-xs-12" type="text" name="author" ng-model="add.artiAuthor">
+                                                            <input id="name" class="form-control col-md-7 col-xs-12" type="text" name="name" ng-model="add.arlName">
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                <button type="button" class="btn btn-primary" ng-click="doAddArticle(add)">保存</button>
+                                                <button type="button" class="btn btn-primary" ng-click="doAddArticleList(add)">保存</button>
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +403,6 @@
                                             </th>
                                             <th class="column-title">ID </th>
                                             <th class="column-title">名称 </th>
-                                            <th class="column-title">作者 </th>
                                             <th class="column-title no-link last"><span class="nobr">操作</span>
                                             </th>
                                             <th class="bulk-actions" colspan="7">
@@ -419,47 +412,40 @@
                                         </thead>
 
                                         <tbody>
-                                        <tr ng-repeat="article in articles" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
+                                        <tr ng-repeat="articleList in articleLists" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
                                             <td class="a-center">
                                                 <input type="checkbox" class="flat" name="table_records">
                                             </td>
-                                            <td class=" ">{{article.artiId}}</td>
-                                            <td class=" ">{{article.artiName}}</td>
-                                            <td class=" ">{{article.artiAuthor}}</td>
-                                            <td class=" last"><a href="" data-toggle="modal" data-target=".article-edit" ng-click="editArticle(article)">编辑</a></td>
+                                            <td class=" ">{{articleList.arlId}}</td>
+                                            <td class=" ">{{articleList.arlName}}</td>
+                                            <td class=" last"><a href="" data-toggle="modal" data-target=".article-list-edit" ng-click="editArticleList(articleList)">编辑</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
 
-                                <div class="modal fade bs-example-modal-lg article-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade bs-example-modal-lg article-list-edit" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
 
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                                 </button>
-                                                <h4 class="modal-title" id="">编辑文章</h4>
+                                                <h4 class="modal-title" id="">编辑文章列表</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form data-parsley-validate class="form-horizontal form-label-left">
                                                     <div class="form-group">
                                                         <label for="edit-name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
                                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input id="edit-name" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.artiName">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="edit-author" class="control-label col-md-3 col-sm-3 col-xs-12">作者 <span class="required">*</span></label>
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <input id="edit-author" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.artiAuthor">
+                                                            <input id="edit-name" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.arlName">
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                <button type="button" class="btn btn-primary" ng-click="doEditArticle(edit)">保存</button>
+                                                <button type="button" class="btn btn-primary" ng-click="doEditArticleList(edit)">保存</button>
                                             </div>
 
                                         </div>
@@ -517,6 +503,6 @@
 <script th:src="@{'/resource/gentelella/js/custom.js'}"></script>
 
 <script th:src="@{'/resource/basic/angular/angular.min.js'}"></script>
-<script th:src="@{'/resource/project/js/article.js'}"></script>
+<script th:src="@{'/resource/project/js/article-list.js'}"></script>
 </body>
 </html>

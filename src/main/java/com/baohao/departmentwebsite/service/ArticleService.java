@@ -1,8 +1,10 @@
 package com.baohao.departmentwebsite.service;
 
+import com.baohao.departmentwebsite.dao.ArticleListMapper;
 import com.baohao.departmentwebsite.dao.ArticleMapper;
 import com.baohao.departmentwebsite.model.Article;
 import com.baohao.departmentwebsite.model.ArticleExample;
+import com.baohao.departmentwebsite.model.ArticleList;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,6 +14,9 @@ import java.util.List;
 public class ArticleService {
     @Resource
     private ArticleMapper articleMapper;
+
+    @Resource
+    private ArticleListMapper articleListMapper;
 
     public List<Article> listArticle() {
         ArticleExample example = new ArticleExample();
@@ -26,5 +31,18 @@ public class ArticleService {
 
     public void editArticle(Article edit) {
         articleMapper.updateByPrimaryKeySelective(edit);
+    }
+
+    public List<ArticleList> listArticleList() {
+        List<ArticleList> articleListList = articleListMapper.selectByExample(null);
+        return articleListList;
+    }
+
+    public void addArticleList(ArticleList add) {
+        articleListMapper.insertSelective(add);
+    }
+
+    public void editArticleList(ArticleList edit) {
+        articleListMapper.updateByPrimaryKeySelective(edit);
     }
 }
