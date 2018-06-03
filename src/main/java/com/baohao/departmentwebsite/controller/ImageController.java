@@ -11,4 +11,9 @@ public class ImageController {
     public String imageList(Model model) {
         return "image/list";
     }
+
+    @RequestMapping(value = "image/group/list", method = RequestMethod.GET)
+    public String imageGroupList(Model model) {
+        return "image-group/list";
+    }
 }

@@ -291,4 +291,44 @@ public class AllRestController {
             return ResultHolder.error(e.getMessage());
         }
     }
+
+    @RequestMapping(value = "image/group/list", method = RequestMethod.POST)
+    public ResultHolder listImageGroup(@RequestBody ImageGroupListRequest request) {
+        try {
+            List<ImageGroupInfo> imageGroupInfoList = imageService.listImageGroup();
+            return ResultHolder.success(imageGroupInfoList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "image/group/add", method = RequestMethod.POST)
+    public ResultHolder addImageGroup(@RequestBody ImageGroupAddRequest request) {
+        try {
+            ImageGroupInfo add = new ImageGroupInfo();
+            add.setGroupName(request.getGroupName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
+            imageService.addImageGroup(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "image/group/edit", method = RequestMethod.POST)
+    public ResultHolder editImageGroup(@RequestBody ImageGroupEditRequest request) {
+        try {
+            ImageGroupInfo edit = new ImageGroupInfo();
+            edit.setGroupId(request.getGroupId());
+            edit.setGroupName(request.getGroupName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            imageService.editImageGroup(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
 }
