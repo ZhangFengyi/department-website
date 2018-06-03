@@ -4,6 +4,7 @@ import com.baohao.departmentwebsite.common.util.EncryptUtils;
 import com.baohao.departmentwebsite.controller.request.*;
 import com.baohao.departmentwebsite.model.*;
 import com.baohao.departmentwebsite.service.ArticleService;
+import com.baohao.departmentwebsite.service.ImageService;
 import com.baohao.departmentwebsite.service.MenuService;
 import com.baohao.departmentwebsite.service.ManagerService;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,9 @@ public class AllRestController {
 
     @Resource
     private ArticleService articleService;
+
+    @Resource
+    private ImageService imageService;
 
     @RequestMapping(value = "/manager/add", method = RequestMethod.POST)
     public ResultHolder userAdd(@RequestBody ManagerAddRequest newManager) {
@@ -240,6 +244,48 @@ public class AllRestController {
             date.setTime(System.currentTimeMillis());
             edit.setUpdateTime(date);
             articleService.editArticleList(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "image/list", method = RequestMethod.POST)
+    public ResultHolder listImage(@RequestBody ImageListRequest request) {
+        try {
+            List<ImageInfo> imageInfoList = imageService.listImage();
+            return ResultHolder.success(imageInfoList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "image/add", method = RequestMethod.POST)
+    public ResultHolder addImage(@RequestBody ImageAddRequest request) {
+        try {
+            ImageInfo add = new ImageInfo();
+            add.setImgName(request.getImgName());
+            add.setImgPath(request.getImgPath());
+            add.setImgGroupId(request.getImgGroupId());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
+            imageService.addImage(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "image/edit", method = RequestMethod.POST)
+    public ResultHolder editImage(@RequestBody ImageEditRequest request) {
+        try {
+            ImageInfo edit = new ImageInfo();
+            edit.setImgId(request.getImgId());
+            edit.setImgName(request.getImgName());
+            edit.setImgPath(request.getImgPath());
+            edit.setImgGroupId(request.getImgGroupId());
+            imageService.editImage(edit);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());

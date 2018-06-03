@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="managerApp" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="imageApp" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -19,7 +19,7 @@
     <!--<link href="../vendors/nprogress/nprogress.css" rel="stylesheet">-->
     <link th:href="@{'/resource/basic/nprogress/nprogress.css'}" rel="stylesheet">
     <!-- iCheck -->
-    <!--<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
+   <!--<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
     <link th:href="@{'/resource/basic/iCheck/skins/flat/green.css'}" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
     <!--<link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">-->
@@ -52,7 +52,7 @@
     <link th:href="@{'/resource/gentelella/css/custom.min.css'}" rel="stylesheet">
   </head>
 
-  <body class="nav-md" ng-controller="managerCtrl">
+  <body class="nav-md" ng-controller="imageCtrl">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -326,7 +326,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>管理员 <small>后台管理系统用户</small></h3>
+                <h3>图片 <small>前端页面顶部的图片</small></h3>
               </div>
 
               <div class="title_right">
@@ -347,7 +347,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>管理员列表 <small>当前后台管理系统所有用户</small></h2>
+                    <h2>图片列表 <small>当前前端页面顶部所有的图片</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -368,60 +368,49 @@
 
                   <div class="x_content">
 
-                    <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".image-add" ng-click="addImage()">添加</button>
 
-                    <!-- modals -->
-                    <!-- Large modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".manager-add" ng-click="addManager">添加</button>
-
-                    <div class="modal fade bs-example-modal-lg manager-add" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade bs-example-modal-lg image-add" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="myModalLabel">添加管理员</h4>
+                            <h4 class="modal-title" id="myModalLabel">添加图片</h4>
                           </div>
                           <div class="modal-body">
-                              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                                  <div class="form-group">
-                                    <label for="username" class="control-label col-md-3 col-sm-3 col-xs-12">用户名 <span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input id="username" class="form-control col-md-7 col-xs-12" type="text" name="username" ng-model="newManager.username">
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">邮箱 <span class="required">*</span>
-                                      </label>
-                                      <div class="col-md-6 col-sm-6 col-xs-12">
-                                          <input type="email" id="email" ng-model="newManager.email" required="required" class="form-control col-md-7 col-xs-12">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">密码 <span class="required">*</span>
-                                      </label>
-                                      <div class="col-md-6 col-sm-6 col-xs-12">
-                                          <input type="password" id="password" name="password" ng-model="newManager.password" required="required" class="form-control col-md-7 col-xs-12">
-                                      </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm-password">确认密码 <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <input type="password" id="confirm-password" name="password" ng-model="newManager.confirmPassword" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                  </div>
-                              </form>
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                              <div class="form-group">
+                                <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="name" class="form-control col-md-7 col-xs-12" type="text" name="name" ng-model="add.imgName">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="path" class="control-label col-md-3 col-sm-3 col-xs-12">链接 <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="path" class="form-control col-md-7 col-xs-12" type="text" name="path" ng-model="add.imgPath">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="groupId">图片组 ID <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="number" id="groupId" ng-model="add.imgGroupId" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                            </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="doAddManager(newManager)">保存</button>
+                            <button type="button" class="btn btn-primary" ng-click="doAddImage(add)">保存</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <!-- /modals -->
+
+                    <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
@@ -431,11 +420,9 @@
                               <input type="checkbox" id="check-all" class="flat">
                             </th>
                             <th class="column-title">ID </th>
-                            <th class="column-title">昵称 </th>
-                            <th class="column-title">邮箱 </th>
-                            <!--<th class="column-title">头像 </th>-->
-                            <th class="column-title">登录时间 </th>
-                            <th class="column-title">登录 IP </th>
+                            <th class="column-title">名称 </th>
+                            <th class="column-title">链接 </th>
+                            <th class="column-title">组别 ID </th>
                             <th class="column-title no-link last"><span class="nobr">操作</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -445,65 +432,56 @@
                         </thead>
 
                         <tbody>
-                            <tr ng-repeat="manager in managers" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
-                                <td class="a-center">
-                                    <input type="checkbox" class="flat" name="table_records">
-                                </td>
-                                <td class=" ">{{manager.magId}}</td>
-                                <td class=" ">{{manager.magName}}</td>
-                                <td class=" ">{{manager.magEmail}}</td>
-                                <!--<td class=" ">{{manager.magImage}}</td>-->
-                                <td class=" ">{{manager.magLoginTime}}</td>
-                                <td class=" ">{{manager.magLoginIp}}</td>
-                                <td class=" last"><a href="" data-toggle="modal" data-target=".manager-edit" ng-click="editManager(manager)">编辑</a></td>
-                            </tr>
+                          <tr ng-repeat="image in images" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
+                            <td class="a-center">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">{{image.imgId}}</td>
+                            <td class=" ">{{image.imgName}}</td>
+                            <td class=" ">{{image.imgPath}}</td>
+                            <td class=" ">{{image.imgGroupId}}</td>
+                            <td class=" last"><a href="" data-toggle="modal" data-target=".image-edit" ng-click="editImage(image)">编辑</a></td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
 
-                    <div class="modal fade bs-example-modal-lg manager-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade bs-example-modal-lg image-edit" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="">编辑管理员</h4>
+                            <h4 class="modal-title" id="">编辑图片</h4>
                           </div>
                           <div class="modal-body">
                             <form data-parsley-validate class="form-horizontal form-label-left">
                               <div class="form-group">
-                                <label for="editUsername" class="control-label col-md-3 col-sm-3 col-xs-12">用户名 <span class="required">*</span></label>
+                                <label for="edit-name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="editUsername" class="form-control col-md-7 col-xs-12" type="text" ng-model="editM.magName">
+                                  <input id="edit-name" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.imgName">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="editEmail">邮箱 <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-path">链接 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="email" id="editEmail" ng-model="editM.magEmail" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" id="edit-path" ng-model="edit.imgPath" required="required" class="form-control col-md-7 col-xs-12">
                                 </div>
                               </div>
-                              <!--<div class="form-group">-->
-                                <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="editPassword">密码 <span class="required">*</span>-->
-                                <!--</label>-->
-                                <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
-                                  <!--<input type="password" id="editPassword" ng-model="editM.magPsw" required="required" class="form-control col-md-7 col-xs-12">-->
-                                <!--</div>-->
-                              <!--</div>-->
-                              <!--<div class="form-group">-->
-                                <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-confirm-password">确认密码 <span class="required">*</span>-->
-                                <!--</label>-->
-                                <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
-                                  <!--<input type="password" id="edit-confirm-password" ng-model="editM.confirmPassword" required="required" class="form-control col-md-7 col-xs-12">-->
-                                <!--</div>-->
-                              <!--</div>-->
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="editGroupId">图片组 ID <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="number" id="editGroupId" ng-model="edit.imgGroupId" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
                             </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="doEditManager(editM)">保存</button>
+                            <button type="button" class="btn btn-primary" ng-click="doEditImage(edit)">保存</button>
                           </div>
 
                         </div>
@@ -561,6 +539,6 @@
     <script th:src="@{'/resource/gentelella/js/custom.js'}"></script>
 
     <script th:src="@{'/resource/basic/angular/angular.min.js'}"></script>
-    <script th:src="@{'/resource/project/js/manager.js'}"></script>
+    <script th:src="@{'/resource/project/js/image.js'}"></script>
   </body>
 </html>
