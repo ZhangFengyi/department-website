@@ -374,6 +374,66 @@ public class VisitInfoExample {
             addCriterion("visit_time not between", value1, value2, "visitTime");
             return (Criteria) this;
         }
+
+        public Criteria andVisitUserIdIsNull() {
+            addCriterion("visit_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdIsNotNull() {
+            addCriterion("visit_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdEqualTo(Integer value) {
+            addCriterion("visit_user_id =", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdNotEqualTo(Integer value) {
+            addCriterion("visit_user_id <>", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdGreaterThan(Integer value) {
+            addCriterion("visit_user_id >", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("visit_user_id >=", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdLessThan(Integer value) {
+            addCriterion("visit_user_id <", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("visit_user_id <=", value, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdIn(List<Integer> values) {
+            addCriterion("visit_user_id in", values, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdNotIn(List<Integer> values) {
+            addCriterion("visit_user_id not in", values, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("visit_user_id between", value1, value2, "visitUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andVisitUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("visit_user_id not between", value1, value2, "visitUserId");
+            return (Criteria) this;
+        }
     }
 
     /**
