@@ -3,10 +3,7 @@ package com.baohao.departmentwebsite.controller;
 import com.baohao.departmentwebsite.common.util.EncryptUtils;
 import com.baohao.departmentwebsite.controller.request.*;
 import com.baohao.departmentwebsite.model.*;
-import com.baohao.departmentwebsite.service.ArticleService;
-import com.baohao.departmentwebsite.service.ImageService;
-import com.baohao.departmentwebsite.service.MenuService;
-import com.baohao.departmentwebsite.service.ManagerService;
+import com.baohao.departmentwebsite.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +27,9 @@ public class AllRestController {
 
     @Resource
     private ImageService imageService;
+
+    @Resource
+    private VideoService videoService;
 
     @RequestMapping(value = "/manager/add", method = RequestMethod.POST)
     public ResultHolder userAdd(@RequestBody ManagerAddRequest newManager) {
@@ -326,6 +326,87 @@ public class AllRestController {
             Date date = new Date();
             date.setTime(System.currentTimeMillis());
             imageService.editImageGroup(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/list", method = RequestMethod.POST)
+    public ResultHolder listVideo(@RequestBody VideoListRequest request) {
+        try {
+            List<VideoInfo> videoInfoList = videoService.listVideo();
+            return ResultHolder.success(videoInfoList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/add", method = RequestMethod.POST)
+    public ResultHolder addVideo(@RequestBody VideoAddRequest request) {
+        try {
+            VideoInfo add = new VideoInfo();
+            add.setVideoName(request.getVideoName());
+            add.setVideoPath(request.getVideoPath());
+            add.setVideoGroupId(request.getVideoGroupId());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
+            videoService.addVideo(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/edit", method = RequestMethod.POST)
+    public ResultHolder editVideo(@RequestBody VideoEditRequest request) {
+        try {
+            VideoInfo edit = new VideoInfo();
+            edit.setVideoId(request.getVideoId());
+            edit.setVideoName(request.getVideoName());
+            edit.setVideoPath(request.getVideoPath());
+            edit.setVideoGroupId(request.getVideoGroupId());
+            videoService.editVideo(edit);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/group/list", method = RequestMethod.POST)
+    public ResultHolder listVideoGroup(@RequestBody VideoGroupListRequest request) {
+        try {
+            List<VideoGroupInfo> videoGroupInfoList = videoService.listVideoGroup();
+            return ResultHolder.success(videoGroupInfoList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/group/add", method = RequestMethod.POST)
+    public ResultHolder addVideoGroup(@RequestBody VideoGroupAddRequest request) {
+        try {
+            VideoGroupInfo add = new VideoGroupInfo();
+            add.setGroupName(request.getGroupName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            videoService.addVideoGroup(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "video/group/edit", method = RequestMethod.POST)
+    public ResultHolder editVideoGroup(@RequestBody VideoGroupEditRequest request) {
+        try {
+            VideoGroupInfo edit = new VideoGroupInfo();
+            edit.setGroupId(request.getGroupId());
+            edit.setGroupName(request.getGroupName());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            videoService.editVideoGroup(edit);
             return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());

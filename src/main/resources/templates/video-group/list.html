@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="snApp" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="videoGroupApp" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -19,7 +19,7 @@
     <!--<link href="../vendors/nprogress/nprogress.css" rel="stylesheet">-->
     <link th:href="@{'/resource/basic/nprogress/nprogress.css'}" rel="stylesheet">
     <!-- iCheck -->
-   <!--<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
+    <!--<link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">-->
     <link th:href="@{'/resource/basic/iCheck/skins/flat/green.css'}" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
     <!--<link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">-->
@@ -52,7 +52,7 @@
     <link th:href="@{'/resource/gentelella/css/custom.min.css'}" rel="stylesheet">
   </head>
 
-  <body class="nav-md" ng-controller="snCtrl">
+  <body class="nav-md" ng-controller="videoGroupCtrl">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -95,6 +95,12 @@
                       <li><a href="/articleList/list">文章列表</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-table"></i> 菜单栏 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/fn/list">一级菜单列表</a></li>
+                      <li><a href="/sn/list">二级菜单列表</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-table"></i> 图片管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/image/list">图片</a></li>
@@ -105,12 +111,6 @@
                     <ul class="nav child_menu">
                       <li><a href="/video/list">视频</a></li>
                       <li><a href="/video/group/list">视频组</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> 菜单栏 <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/fn/list">一级菜单列表</a></li>
-                      <li><a href="/sn/list">二级菜单列表</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> 用户信息 <span class="fa fa-chevron-down"></span></a>
@@ -332,7 +332,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>二级菜单 <small>前端页面顶部的二级菜单</small></h3>
+                <h3>视频组 <small>系统前端页面展示的视频组</small></h3>
               </div>
 
               <div class="title_right">
@@ -353,7 +353,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>二级菜单列表 <small>当前前端页面顶部所有的二级菜单</small></h2>
+                    <h2>视频组列表 <small>当前前端页面上的所有视频组</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -374,57 +374,39 @@
 
                   <div class="x_content">
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".sn-add" ng-click="addSn()">添加</button>
+                    <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
 
-                    <div class="modal fade bs-example-modal-lg sn-add" tabindex="-1" role="dialog" aria-hidden="true">
+                    <!-- modals -->
+                    <!-- Large modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".video-group-add" ng-click="addVideoGroup">添加</button>
+
+                    <div class="modal fade bs-example-modal-lg video-group-add" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="myModalLabel">添加二级菜单</h4>
+                            <h4 class="modal-title" id="myModalLabel">添加视频组</h4>
                           </div>
                           <div class="modal-body">
-                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                              <div class="form-group">
-                                <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="name" class="form-control col-md-7 col-xs-12" type="text" name="name" ng-model="add.snName">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">编号 <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="number" id="number" ng-model="add.snNumber" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="doc">对应的文件链接 <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="text" id="doc" name="doc" ng-model="add.snDoc" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fn-id">所属一级菜单 ID <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="number" id="fn-id" name="fn-id" ng-model="add.fnId" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                            </form>
+                              <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                  <div class="form-group">
+                                    <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                      <input id="name" class="form-control col-md-7 col-xs-12" type="text" name="name" ng-model="add.groupName">
+                                    </div>
+                                  </div>
+                              </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="doAddSn(add)">保存</button>
+                            <button type="button" class="btn btn-primary" ng-click="doAddVideoGroup(add)">保存</button>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    <!-- <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p> -->
+                    <!-- /modals -->
 
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
@@ -435,9 +417,6 @@
                             </th>
                             <th class="column-title">ID </th>
                             <th class="column-title">名称 </th>
-                            <th class="column-title">编号 </th>
-                            <th class="column-title">对应的文件链接 </th>
-                            <th class="column-title">所属一级菜单 ID </th>
                             <th class="column-title no-link last"><span class="nobr">操作</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -447,64 +426,40 @@
                         </thead>
 
                         <tbody>
-                          <tr ng-repeat="sn in sns" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
-                            <td class="a-center">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">{{sn.snId}}</td>
-                            <td class=" ">{{sn.snName}}</td>
-                            <td class=" ">{{sn.snNumber}}</td>
-                            <td class=" ">{{sn.snDoc}}</td>
-                            <td class=" ">{{sn.fnId}}</td>
-                            <td class=" last"><a href="" data-toggle="modal" data-target=".sn-edit" ng-click="editSn(sn)">编辑</a></td>
-                          </tr>
+                            <tr ng-repeat="videoGroup in videoGroups" ng-class="$index % 2 == 0 ? 'even pointer' : 'odd pointer'">
+                                <td class="a-center">
+                                    <input type="checkbox" class="flat" name="table_records">
+                                </td>
+                                <td class=" ">{{videoGroup.groupId}}</td>
+                                <td class=" ">{{videoGroup.groupName}}</td>
+                                <td class=" last"><a href="" data-toggle="modal" data-target=".video-group-edit" ng-click="editVideoGroup(videoGroup)">编辑</a></td>
+                            </tr>
                         </tbody>
                       </table>
                     </div>
 
-                    <div class="modal fade bs-example-modal-lg sn-edit" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal fade bs-example-modal-lg video-group-edit" tabindex="-1" role="dialog" aria-hidden="true">
                       <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title" id="">编辑二级菜单</h4>
+                            <h4 class="modal-title" id="">编辑视频组</h4>
                           </div>
                           <div class="modal-body">
                             <form data-parsley-validate class="form-horizontal form-label-left">
                               <div class="form-group">
-                                <label for="edit-name" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
+                                <label for="editName" class="control-label col-md-3 col-sm-3 col-xs-12">名称 <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="edit-name" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.snName">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-number">编号 <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="number" id="edit-number" ng-model="edit.snNumber" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-doc">对应的文件链接 <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="text" id="edit-doc" ng-model="edit.snDoc" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="edit-fn-id">所属一级菜单 ID <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input type="number" id="edit-fn-id" ng-model="edit.fnId" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input id="editName" class="form-control col-md-7 col-xs-12" type="text" ng-model="edit.groupName">
                                 </div>
                               </div>
                             </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" ng-click="doEditSn(edit)">保存</button>
+                            <button type="button" class="btn btn-primary" ng-click="doEditVideoGroup(edit)">保存</button>
                           </div>
 
                         </div>
@@ -562,6 +517,6 @@
     <script th:src="@{'/resource/gentelella/js/custom.js'}"></script>
 
     <script th:src="@{'/resource/basic/angular/angular.min.js'}"></script>
-    <script th:src="@{'/resource/project/js/sn.js'}"></script>
+    <script th:src="@{'/resource/project/js/video-group.js'}"></script>
   </body>
 </html>
