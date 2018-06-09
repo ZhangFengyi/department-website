@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -56,4 +57,15 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(Model model) {
+        SecurityUtils.getSubject().logout();
+        return new ModelAndView("login");
+    }
+
+
+    @RequestMapping("/403")
+    public ModelAndView unauthorizedRole() {
+        return new ModelAndView("/403");
+    }
 }
