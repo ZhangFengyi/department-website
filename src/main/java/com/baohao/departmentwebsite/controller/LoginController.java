@@ -4,9 +4,8 @@ import com.baohao.departmentwebsite.common.constant.SessionConstants;
 import com.baohao.departmentwebsite.model.ManagerInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +51,18 @@ public class LoginController {
             }
         } catch (IncorrectCredentialsException | UnknownAccountException e) {
             message = "用户名或密码错误！";
+        } catch (ExcessiveAttemptsException e) {
+            message = "excessive attempts";
+        } catch (LockedAccountException e) {
+            message = "the user has been locked";
+        } catch (DisabledAccountException e) {
+            message = "the user has been disabled";
+        } catch (ExpiredCredentialsException e) {
+            message = "user expires";
+        } catch (UnauthorizedException e) {
+            message = "not authorized. " + e.getMessage();
+        } catch (AuthenticationException e) {
+            message = e.getMessage();
         }
         model.addAttribute("message", message);
         return "login";
