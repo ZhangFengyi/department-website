@@ -48,8 +48,9 @@
         <!--<table tableName="video_info"></table>-->
         <!--<table tableName="visit_info"></table>-->
         <!--<table tableName="image_group_info"></table>-->
-        <table tableName="video_group_info"></table>
+        <!--<table tableName="video_group_info"></table>-->
         <!--<table tableName="article"></table>-->
+        <table tableName="news"></table>
 
 
     </context>

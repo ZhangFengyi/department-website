@@ -5,6 +5,7 @@ import com.baohao.departmentwebsite.controller.request.*;
 import com.baohao.departmentwebsite.model.*;
 import com.baohao.departmentwebsite.service.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,9 @@ public class AllRestController {
 
     @Resource
     private VideoService videoService;
+
+    @Resource
+    private NewsService newsService;
 
     @RequestMapping(value = "/manager/add", method = RequestMethod.POST)
     public ResultHolder userAdd(@RequestBody ManagerAddRequest newManager) {
@@ -408,6 +412,16 @@ public class AllRestController {
             date.setTime(System.currentTimeMillis());
             videoService.editVideoGroup(edit);
             return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "news/list", method = RequestMethod.POST)
+    public ResultHolder listNews(@RequestBody NewsListRequest request) {
+        try {
+            List<News> newsList = newsService.listNews();
+            return ResultHolder.success(newsList);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
         }
