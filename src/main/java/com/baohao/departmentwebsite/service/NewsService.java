@@ -15,7 +15,15 @@ public class NewsService {
 
     public List<News> listNews() {
         NewsExample example = new NewsExample();
-        List<News> newsList = newsMapper.selectByExample(example);
+        List<News> newsList = newsMapper.selectByExampleWithBLOBs(example);
         return newsList;
+    }
+
+    public void addNews(News add) {
+        newsMapper.insertSelective(add);
+    }
+
+    public void editNews(News edit) {
+        newsMapper.updateByPrimaryKeyWithBLOBs(edit);
     }
 }

@@ -6,12 +6,15 @@ import com.baohao.departmentwebsite.model.*;
 import com.baohao.departmentwebsite.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -422,6 +425,42 @@ public class AllRestController {
         try {
             List<News> newsList = newsService.listNews();
             return ResultHolder.success(newsList);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "news/add", method = RequestMethod.POST)
+    public ResultHolder addNews(@RequestBody NewsAddRequest request) {
+        try {
+            News add = new News();
+            add.setTitle(request.getTitle());
+            add.setIntroduction(request.getIntroduction());
+            add.setContent(request.getContent());
+            add.setPublishTime(request.getPublishTime());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            newsService.addNews(add);
+            return ResultHolder.success(null);
+        } catch (Exception e) {
+            return ResultHolder.error(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "news/edit", method = RequestMethod.POST)
+    public ResultHolder editNews(@RequestBody NewsEditRequest request) {
+        try {
+            News edit = new News();
+            edit.setId(request.getId());
+            edit.setTitle(request.getTitle());
+            edit.setIntroduction(request.getIntroduction());
+            edit.setContent(request.getContent());
+            edit.setPublishTime(request.getPublishTime());
+            Date date = new Date();
+            date.setTime(System.currentTimeMillis());
+            edit.setUpdateTime(date);
+            newsService.editNews(edit);
+            return ResultHolder.success(null);
         } catch (Exception e) {
             return ResultHolder.error(e.getMessage());
         }
