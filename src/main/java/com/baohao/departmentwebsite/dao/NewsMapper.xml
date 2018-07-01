@@ -9,7 +9,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="publish_time" jdbcType="VARCHAR" property="publishTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -177,7 +177,7 @@
       publish_time, create_time, update_time, 
       content)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
-      #{publishTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{publishTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.baohao.departmentwebsite.model.News">
@@ -220,7 +220,7 @@
         #{introduction,jdbcType=VARCHAR},
       </if>
       <if test="publishTime != null">
-        #{publishTime,jdbcType=TIMESTAMP},
+        #{publishTime,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -260,7 +260,7 @@
         introduction = #{record.introduction,jdbcType=VARCHAR},
       </if>
       <if test="record.publishTime != null">
-        publish_time = #{record.publishTime,jdbcType=TIMESTAMP},
+        publish_time = #{record.publishTime,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -285,7 +285,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       introduction = #{record.introduction,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=TIMESTAMP},
+      publish_time = #{record.publishTime,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -302,7 +302,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       introduction = #{record.introduction,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=TIMESTAMP},
+      publish_time = #{record.publishTime,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -323,7 +323,7 @@
         introduction = #{introduction,jdbcType=VARCHAR},
       </if>
       <if test="publishTime != null">
-        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+        publish_time = #{publishTime,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -345,7 +345,7 @@
     update news
     set title = #{title,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      publish_time = #{publishTime,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -359,7 +359,7 @@
     update news
     set title = #{title,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      publish_time = #{publishTime,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

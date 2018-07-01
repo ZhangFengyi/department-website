@@ -37,7 +37,7 @@ public class News {
      *
      * @mbg.generated
      */
-    private Date publishTime;
+    private String publishTime;
 
     /**
      *
@@ -146,7 +146,7 @@ public class News {
      *
      * @mbg.generated
      */
-    public Date getPublishTime() {
+    public String getPublishTime() {
         return publishTime;
     }
 
@@ -158,8 +158,8 @@ public class News {
      *
      * @mbg.generated
      */
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setPublishTime(String publishTime) {
+        this.publishTime = publishTime == null ? null : publishTime.trim();
     }
 
     /**

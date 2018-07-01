@@ -440,6 +440,7 @@ public class AllRestController {
             add.setPublishTime(request.getPublishTime());
             Date date = new Date();
             date.setTime(System.currentTimeMillis());
+            add.setCreateTime(date);
             newsService.addNews(add);
             return ResultHolder.success(null);
         } catch (Exception e) {
