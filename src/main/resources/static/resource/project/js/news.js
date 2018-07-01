@@ -1,4 +1,4 @@
-var fn_app = angular.module('newsApp', []);
+var fn_app = angular.module('newsApp', ['ngSanitize']);
 
 fn_app.controller('newsCtrl', function ($scope, $http) {
     $scope.list = function () {
@@ -21,6 +21,11 @@ fn_app.controller('newsCtrl', function ($scope, $http) {
     };
 
     $scope.doEditNews = function (news) {
+        // 获取新闻内容
+        news.content = $("#editor-one-edit").html();
+        // 获取发布时间
+        news.publishTime = $("#publish-time-edit").val();
+
         $http.post('/news/edit', news).then(function (value) {
             var data = value.data;
             if (data.success) {
@@ -53,6 +58,11 @@ fn_app.controller('newsCtrl', function ($scope, $http) {
     };
 
     $scope.doAddNews = function (news) {
+        // 获取新闻内容
+        news.content = $("#editor-one").html();
+        // 获取发布时间内
+        news.publishTime = $("#publish-time").val();
+
         $http.post('/news/add', news).then(function (response) {
             var data = response.data;
             if (data.success) {
